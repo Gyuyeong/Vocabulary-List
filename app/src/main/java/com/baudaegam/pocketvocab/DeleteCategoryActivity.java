@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,36 +17,30 @@ import android.widget.Toast;
 
 import java.util.List;
 
-// =========== A separate recyclerView activity for deleting the vocabularies ======================
-public class DeleteVocabActivity extends AppCompatActivity {
+public class DeleteCategoryActivity extends AppCompatActivity {
+    public static final int ALL_VOCAB_CATEGORY_ID = 1;
 
-    private int categoryId;
-
-    private VocabViewModel vocabViewModel;
-
-    final DeleteVocabAdapter adapter = new DeleteVocabAdapter();
+    private CategoryViewModel categoryViewModel;
+    final DeleteCategoryAdapter adapter = new DeleteCategoryAdapter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_delete_vocab);
-
-        Intent intent = getIntent();
-        categoryId = intent.getIntExtra(CategoryActivity.EXTRA_CATEGORY_ID, 1);
+        setContentView(R.layout.activity_delete_category);
 
         setTitle("Select to Delete");
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view_delete_vocab);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_delete_category);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
         recyclerView.setAdapter(adapter);
 
-        vocabViewModel = ViewModelProviders.of(this).get(VocabViewModel.class);
-        vocabViewModel.getAllVocabsWithCategories(categoryId).observe(this, new Observer<List<Vocab>>() {
+        categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
+        categoryViewModel.getAllCategories().observe(this, new Observer<List<Category>>() {
             @Override
-            public void onChanged(List<Vocab> vocabs) {
-                adapter.setVocabs(vocabs);
+            public void onChanged(List<Category> categories) {
+                adapter.setCategories(categories);
             }
         });
     }
@@ -55,26 +48,29 @@ public class DeleteVocabActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.delete_vocab_menu, menu);
+        menuInflater.inflate(R.menu.delete_category_menu, menu);
         return true;
     }
 
-    // ================================ What should I do here? =====================================
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.delete_vocab:
-                AlertDialog.Builder builder = new AlertDialog.Builder(DeleteVocabActivity.this);
+            case R.id.delete_category:
+                AlertDialog.Builder builder = new AlertDialog.Builder(DeleteCategoryActivity.this);
 
                 builder.setTitle("Are you sure you want to delete them?");
+                builder.setMessage("All vocabularies in the category will be lost.");
 
                 builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        for (Vocab vocab : adapter.checkedVocabs) {
-                            vocabViewModel.delete(vocab);
+                        for (Category category : adapter.checkedCategories) {
+                            if (category.getId() == ALL_VOCAB_CATEGORY_ID) {
+                                Toast.makeText(DeleteCategoryActivity.this, "Cannot Delete All Vocabulary Category", Toast.LENGTH_SHORT).show();
+                                break;
+                            }
+                            categoryViewModel.delete(category);
                         }
-                        Toast.makeText(DeleteVocabActivity.this, "Vocabulary Deleted", Toast.LENGTH_SHORT).show();
                         killActivity();
                     }
                 });
@@ -82,7 +78,7 @@ public class DeleteVocabActivity extends AppCompatActivity {
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(DeleteVocabActivity.this, "Cancelled", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DeleteCategoryActivity.this, "Cancelled", Toast.LENGTH_SHORT).show();
                     }
                 });
 

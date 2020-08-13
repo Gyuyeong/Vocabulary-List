@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DeleteVocabActivity"
-            android:parentActivityName=".VocabActivity"></activity>
+        <activity android:name=".DeleteCategoryActivity"></activity>
+        <activity
+            android:name=".DeleteVocabActivity"
+            android:parentActivityName=".VocabActivity" />
         <activity
             android:name=".AddEditVocabActivity"
             android:parentActivityName=".VocabActivity" />

@@ -1,12 +1,16 @@
 package com.baudaegam.pocketvocab;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import static androidx.room.ForeignKey.CASCADE;
 
-@Entity(tableName = "vocab_table")
+@Entity(tableName = "vocab_table", foreignKeys = {
+        @ForeignKey(onDelete = CASCADE, entity = Category.class,
+        parentColumns = "id", childColumns = "categoryId")
+})
 public class Vocab {
 
     @PrimaryKey(autoGenerate = true)
@@ -20,12 +24,7 @@ public class Vocab {
 
     private int count;
 
-    @ForeignKey(
-            entity = Category.class,
-            parentColumns = "id",
-            childColumns = "categoryId",
-            onDelete = CASCADE
-    )
+    @ColumnInfo(index = true)
     private int categoryId;
 
     public Vocab(String vocab, String meaning, String notes, int count, int categoryId) {

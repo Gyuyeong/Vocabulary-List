@@ -26,6 +26,8 @@ public class VocabActivity extends AppCompatActivity {
     public static final int EDIT_VOCAB_REQUEST = 2;
     public static final int DELETE_VOCAB_REQUEST = 3;
 
+    public static final int ALL_VOCABS = 1;
+
     private int categoryId;
     private String category;
 
@@ -75,12 +77,21 @@ public class VocabActivity extends AppCompatActivity {
         });
 
         vocabViewModel = ViewModelProviders.of(this).get(VocabViewModel.class);
-        vocabViewModel.getAllVocabsWithCategories(categoryId).observe(this, new Observer<List<Vocab>>() {
-            @Override
-            public void onChanged(List<Vocab> vocabs) {
-                adapter.setVocabs(vocabs);
-            }
-        });
+        if (categoryId == ALL_VOCABS) {
+            vocabViewModel.getAllVocabs().observe(this, new Observer<List<Vocab>>() {
+                @Override
+                public void onChanged(List<Vocab> vocabs) {
+                    adapter.setVocabs(vocabs);
+                }
+            });
+        } else {
+            vocabViewModel.getAllVocabsWithCategories(categoryId).observe(this, new Observer<List<Vocab>>() {
+                @Override
+                public void onChanged(List<Vocab> vocabs) {
+                    adapter.setVocabs(vocabs);
+                }
+            });
+        }
     }
 
     @Override

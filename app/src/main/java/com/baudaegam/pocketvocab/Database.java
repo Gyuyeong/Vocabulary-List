@@ -45,7 +45,7 @@ public abstract class Database extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            categoryDao.insert(new Category("base"));
+            categoryDao.insert(new Category("All Vocabulary"));
             return null;
         }
     }
