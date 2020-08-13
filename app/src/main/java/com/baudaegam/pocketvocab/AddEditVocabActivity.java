@@ -10,7 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
-
+ // ============== Activity for adding and editing individual vocabularies ======================
 public class AddEditVocabActivity extends AppCompatActivity {
     public static final String EXTRA_ID =
             "com.baudaegam.pocketvocab.EXTRA_ID";

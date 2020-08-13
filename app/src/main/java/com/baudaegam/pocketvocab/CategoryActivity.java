@@ -18,6 +18,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
+
+// ==================== Activity to display the categories of words ===================
 public class CategoryActivity extends AppCompatActivity {
     private CategoryViewModel categoryViewModel;
     public static final String EXTRA_CATEGORY_ID =
@@ -37,7 +39,7 @@ public class CategoryActivity extends AppCompatActivity {
 
         final CategoryAdapter adapter = new CategoryAdapter();
         recyclerView.setAdapter(adapter);
-
+// ==================== click to access vocabularies of the categories =============================
         adapter.setOnItemClickListener(new CategoryAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Category category) {

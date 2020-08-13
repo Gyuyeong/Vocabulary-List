@@ -20,6 +20,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
+// ============== displays all the vocabularies ==================================================
 public class VocabActivity extends AppCompatActivity {
     public static final int ADD_VOCAB_REQUEST = 1;
     public static final int EDIT_VOCAB_REQUEST = 2;
@@ -41,6 +42,7 @@ public class VocabActivity extends AppCompatActivity {
 
         setTitle(category);
 
+        // ================ Add button ========================================================
         FloatingActionButton buttonAddVocab = findViewById(R.id.button_add_vocab);
         buttonAddVocab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +60,7 @@ public class VocabActivity extends AppCompatActivity {
         final VocabAdapter adapter = new VocabAdapter();
         recyclerView.setAdapter(adapter);
 
+        // =============click individual item to edit them ======================================
         adapter.setOnItemClickListener(new VocabAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Vocab vocab) {
@@ -125,7 +128,7 @@ public class VocabActivity extends AppCompatActivity {
         menuInflater.inflate(R.menu.delete_vocab_menu, menu);
         return true;
     }
-
+// ============ Delete button to go to the Delete Activity ======================================
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {

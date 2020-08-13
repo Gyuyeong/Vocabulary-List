@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+// =========== A separate recyclerView activity for deleting the vocabularies ======================
 public class DeleteVocabActivity extends AppCompatActivity {
 
     private int categoryId;
@@ -55,10 +56,12 @@ public class DeleteVocabActivity extends AppCompatActivity {
         return true;
     }
 
+    // ================================ What should I do here? =====================================
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.delete_vocab:
+                // ====================  Need to replace this ======================================
                 Toast.makeText(this, "Delete Button Clicked", Toast.LENGTH_SHORT).show();
                 return true;
             default:
