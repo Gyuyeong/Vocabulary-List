@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".AddEditVocabActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Vocabulary:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:textSize="20sp">
+
+    </TextView>
+
+
+
+    <EditText
+        android:id="@+id/edit_text_vocab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Vocabulary"
+        android:inputType="text">
+
+    </EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Meaning:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:textSize="20sp">
+
+    </TextView>
+
+    <EditText
+        android:id="@+id/edit_text_meaning"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Meaning"
+        android:inputType="textMultiLine">
+
+    </EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Notes:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:textSize="20sp">
+
+    </TextView>
+
+    <EditText
+        android:id="@+id/edit_text_notes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Notes"
+        android:inputType="textMultiLine">
+
+    </EditText>
+
+
+</LinearLayout>
