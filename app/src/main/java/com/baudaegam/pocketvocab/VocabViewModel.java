@@ -35,8 +35,12 @@ public class VocabViewModel extends AndroidViewModel {
         return allVocabs;
     }
 
-    public LiveData<List<Vocab>> getAllVocabsWithCategories(int categoryId) {
-        allVocabsWithCategories = vocabRepository.getAllVocabsWithCategories(categoryId);
+    public List<Vocab> getAllVocabsWithCategories(int categoryId) {
+        return vocabRepository.getAllVocabsWithCategories(categoryId);
+    }
+
+    public LiveData<List<Vocab>> getLiveAllVocabsWithCategories(int categoryId) {
+        allVocabsWithCategories = vocabRepository.getLiveAllVocabsWithCategories(categoryId);
         return allVocabsWithCategories;
     }
 }

@@ -12,12 +12,14 @@ public class CategoryRepository {
 
     private int categoryId;
     private LiveData<List<Category>> allCategories;
+    private LiveData<List<Category>> allCategoriesExceptAllVocabs;
 
     public CategoryRepository(Application application) {
         Database database = Database.getInstance(application);
         categoryDao = database.categoryDao();
 
         allCategories = categoryDao.getAllCategories();
+        allCategoriesExceptAllVocabs = categoryDao.getAllCategoriesExceptAllVocabs();
     }
 
 
@@ -40,6 +42,10 @@ public class CategoryRepository {
 
     public LiveData<List<Category>> getAllCategories() {
         return allCategories;
+    }
+
+    public LiveData<List<Category>> getAllCategoriesExceptAllVocabs() {
+        return allCategoriesExceptAllVocabs;
     }
 
     private static class InsertCategoryAsyncTask extends AsyncTask<Category, Void, Void> {

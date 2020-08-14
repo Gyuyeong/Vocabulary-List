@@ -44,7 +44,7 @@ public class DeleteVocabActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         vocabViewModel = ViewModelProviders.of(this).get(VocabViewModel.class);
-        vocabViewModel.getAllVocabsWithCategories(categoryId).observe(this, new Observer<List<Vocab>>() {
+        vocabViewModel.getLiveAllVocabsWithCategories(categoryId).observe(this, new Observer<List<Vocab>>() {
             @Override
             public void onChanged(List<Vocab> vocabs) {
                 adapter.setVocabs(vocabs);

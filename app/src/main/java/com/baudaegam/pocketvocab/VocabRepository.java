@@ -37,8 +37,12 @@ public class VocabRepository {
         return allVocabs;
     }
 
-    public LiveData<List<Vocab>> getAllVocabsWithCategories(int categoryId) {
-        allVocabsWithCategories = vocabDao.getAllVocabsWithCategories(categoryId);
+    public List<Vocab> getAllVocabsWithCategories(int categoryId) {
+        return vocabDao.getAllVocabsWithCategories(categoryId);
+    }
+
+    public LiveData<List<Vocab>> getLiveAllVocabsWithCategories(int categoryId) {
+        allVocabsWithCategories = vocabDao.getLiveAllVocabsWithCategories(categoryId);
         return allVocabsWithCategories;
     }
 

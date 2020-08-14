@@ -12,11 +12,13 @@ public class CategoryViewModel extends AndroidViewModel {
     private CategoryRepository categoryRepository;
     private int categoryId;
     private LiveData<List<Category>> allCategories;
+    private LiveData<List<Category>> allCategoriesExceptAllVocabs;
 
     public CategoryViewModel(@NonNull Application application) {
         super(application);
         categoryRepository = new CategoryRepository(application);
         allCategories = categoryRepository.getAllCategories();
+        allCategoriesExceptAllVocabs = categoryRepository.getAllCategoriesExceptAllVocabs();
     }
 
     // ================category=======================
@@ -39,5 +41,9 @@ public class CategoryViewModel extends AndroidViewModel {
 
     public LiveData<List<Category>> getAllCategories() {
         return allCategories;
+    }
+
+    public LiveData<List<Category>> getAllCategoriesExceptAllVocabs() {
+        return allCategoriesExceptAllVocabs;
     }
 }

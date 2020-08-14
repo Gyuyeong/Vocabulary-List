@@ -85,7 +85,7 @@ public class VocabActivity extends AppCompatActivity {
                 }
             });
         } else {
-            vocabViewModel.getAllVocabsWithCategories(categoryId).observe(this, new Observer<List<Vocab>>() {
+            vocabViewModel.getLiveAllVocabsWithCategories(categoryId).observe(this, new Observer<List<Vocab>>() {
                 @Override
                 public void onChanged(List<Vocab> vocabs) {
                     adapter.setVocabs(vocabs);

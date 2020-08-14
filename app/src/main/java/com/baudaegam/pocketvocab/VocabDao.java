@@ -25,5 +25,8 @@ public interface VocabDao {
     LiveData<List<Vocab>> getAllVocabs();
 
     @Query("SELECT * FROM vocab_table WHERE categoryId = :categoryId ORDER BY count DESC")
-    LiveData<List<Vocab>> getAllVocabsWithCategories(int categoryId);
+    LiveData<List<Vocab>> getLiveAllVocabsWithCategories(int categoryId);
+
+    @Query("SELECT * FROM vocab_table WHERE categoryId = :categoryId")
+    List<Vocab> getAllVocabsWithCategories(int categoryId);
 }
