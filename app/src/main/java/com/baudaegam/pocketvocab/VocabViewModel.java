@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
@@ -12,6 +13,8 @@ public class VocabViewModel extends AndroidViewModel {
     private VocabRepository vocabRepository;
     private LiveData<List<Vocab>> allVocabs;
     private LiveData<List<Vocab>> allVocabsWithCategories;
+
+    
 
     public VocabViewModel(@NonNull Application application) {
         super(application);
@@ -43,4 +46,5 @@ public class VocabViewModel extends AndroidViewModel {
         allVocabsWithCategories = vocabRepository.getLiveAllVocabsWithCategories(categoryId);
         return allVocabsWithCategories;
     }
+
 }

@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.DialogInterface;
@@ -32,8 +33,9 @@ public class MultipleChoiceActivity extends AppCompatActivity {
     private Button buttonConfirmNext;
 
     private List<Integer> categoryIdList;
-    private List<Vocab> quizVocabList = new ArrayList<>();
+    private List<Vocab> quizVocabList;
 
+    private VocabViewModel vocabViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,28 +55,10 @@ public class MultipleChoiceActivity extends AppCompatActivity {
         Intent intent = getIntent();
         categoryIdList = intent.getIntegerArrayListExtra(SelectCategoryActivity.EXTRA_CHECKED_CATEGORY_LIST);
 
-        for (int id : categoryIdList) {
-            // How should I deal with retrieving individual data from live data?
-        }
+        vocabViewModel = ViewModelProviders.of(this).get(VocabViewModel.class);
 
-        if (quizVocabList.size() < 3) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(MultipleChoiceActivity.this);
-            builder.setTitle("Require at least three vocabularies to proceed");
-            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    killActivity();
-                }
-            });
-        }
-
-        for (Vocab vocab : quizVocabList) {
-            System.out.print(vocab.getVocab());
-        }
     }
     public void killActivity() {
         finish();
     }
-
-
 }
