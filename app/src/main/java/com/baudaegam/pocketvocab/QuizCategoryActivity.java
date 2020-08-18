@@ -24,8 +24,6 @@ public class QuizCategoryActivity extends AppCompatActivity {
     private Button buttonFlashCard;
     private Button buttonMultipleChoice;
     private VocabViewModel vocabViewModel;
-    private MediatorLiveData<Vocab> liveDataMerger = new MediatorLiveData<>();
-    private LiveData<List<Vocab>> tempVocabList;
     private List<Vocab> quizVocabList;
     ArrayList<Integer> checkedCategoriesId;
 
@@ -43,22 +41,12 @@ public class QuizCategoryActivity extends AppCompatActivity {
         vocabViewModel = ViewModelProviders.of(this).get(VocabViewModel.class);
 
         for (int id : checkedCategoriesId) {
-            // How should I deal with retrieving individual data from live data?
-            tempVocabList = vocabViewModel.getLiveAllVocabsWithCategories(id);
-            liveDataMerger.addSource(tempVocabList, new Observer<List<Vocab>>() {
-                private int count = 0;
-
+            // I want to retrieve individual items from live data and put the individual items
+            // in a separate list called quizVocabList.
+            vocabViewModel.getLiveAllVocabsWithCategories(id).observe(this, new Observer<List<Vocab>>() {
                 @Override
                 public void onChanged(List<Vocab> vocabs) {
-                    if (vocabs.size() < 1) {
-                        liveDataMerger.removeSource(tempVocabList);
-                    } else {
-                        liveDataMerger.setValue(vocabs.get(count));
-                        count++;
-                        if (count >= vocabs.size()) {
-                            liveDataMerger.removeSource(tempVocabList);
-                        }
-                    }
+
                 }
             });
         }
