@@ -24,10 +24,10 @@
         android:layout_centerHorizontal="true"/>
 
     <Button
-        android:id="@+id/quiz"
+        android:id="@+id/search"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:text="Quiz"
+        android:text="Search"
         android:textSize="30sp"
         android:layout_below="@+id/category"
         android:layout_centerHorizontal="true"/>

@@ -9,31 +9,46 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:padding="8dp"
+        >
 
-        <CheckBox
-            android:id="@+id/check_box_select_category"
+        <TextView
+            android:id="@+id/text_view_search_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:text="CategoryName"
             >
 
-        </CheckBox>
-
-        <TextView
-            android:id="@+id/text_view_select_category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:text="Base"
-            android:maxLines="1"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large">
         </TextView>
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/text_view_search_vocab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:maxLines="1"
+            android:layout_toStartOf="@id/text_view_search_category"
+            android:layout_toLeftOf="@id/text_view_search_category"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:ellipsize="end">
 
+        </TextView>
+
+        <TextView
+            android:id="@+id/text_view_search_meaning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_view_search_vocab"
+            android:text="World!"
+            android:ellipsize="end">
+
+        </TextView>
+
+
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

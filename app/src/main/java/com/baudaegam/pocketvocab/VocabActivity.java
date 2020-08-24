@@ -46,6 +46,11 @@ public class VocabActivity extends AppCompatActivity {
 
         // ================ Add button ========================================================
         FloatingActionButton buttonAddVocab = findViewById(R.id.button_add_vocab);
+
+        if (categoryId == 1) {
+            buttonAddVocab.setEnabled(false);
+            buttonAddVocab.hide();
+        }
         buttonAddVocab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

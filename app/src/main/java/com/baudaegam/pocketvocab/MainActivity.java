@@ -10,7 +10,7 @@ import android.widget.Button;
 // ================================ Title Screen =================================================
 public class MainActivity extends AppCompatActivity {
     private Button categoryButton;
-    private Button quizButton;
+    private Button searchVocabButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         categoryButton = findViewById(R.id.category);
-        quizButton = findViewById(R.id.quiz);
+        searchVocabButton = findViewById(R.id.search);
 
         categoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -27,10 +27,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        quizButton.setOnClickListener(new View.OnClickListener() {
+        searchVocabButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openQuizActivity();
+                openSearchVocabActivity();
             }
         });
     }
@@ -40,8 +40,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openQuizActivity() {
-        Intent intent = new Intent(this, SelectCategoryActivity.class);
+    public void openSearchVocabActivity() {
+        Intent intent = new Intent(this, SearchVocabActivity.class);
         startActivity(intent);
     }
+
 }
