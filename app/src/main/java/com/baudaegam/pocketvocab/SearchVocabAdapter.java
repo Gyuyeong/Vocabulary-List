@@ -3,6 +3,7 @@ package com.baudaegam.pocketvocab;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
@@ -16,7 +17,15 @@ import java.util.List;
 public class SearchVocabAdapter extends RecyclerView.Adapter<SearchVocabAdapter.SearchVocabHolder> implements Filterable {
     private List<Vocab> vocabs = new ArrayList<>();
     private List<Vocab> vocabsFull;
+    private OnItemClickListener listener;
 
+    public interface OnItemClickListener {
+        void onItemClick(Vocab vocab);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
 
     @NonNull
     @Override
@@ -91,6 +100,16 @@ public class SearchVocabAdapter extends RecyclerView.Adapter<SearchVocabAdapter.
             textViewSearchVocab = itemView.findViewById(R.id.text_view_search_vocab);
             textViewSearchMeaning = itemView.findViewById(R.id.text_view_search_meaning);
             textViewSearchCategory = itemView.findViewById(R.id.text_view_search_category);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && listener != null) {
+                        listener.onItemClick(vocabs.get(position));
+                    }
+                }
+            });
         }
     }
 }

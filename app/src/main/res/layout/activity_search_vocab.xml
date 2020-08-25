@@ -9,7 +9,8 @@
     <SearchView
         android:id="@+id/search_view_vocab"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:queryHint="Search vocabulary:">
 
     </SearchView>
 

@@ -29,4 +29,7 @@ public interface VocabDao {
 
     @Query("SELECT * FROM vocab_table WHERE categoryId = :categoryId")
     List<Vocab> getAllVocabsWithCategories(int categoryId);
+
+    @Query("SELECT * FROM vocab_table WHERE vocab LIKE :vocab")
+    LiveData<List<Vocab>> getSearchedVocabs(String vocab);
 }

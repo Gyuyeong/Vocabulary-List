@@ -13,6 +13,7 @@ public class VocabViewModel extends AndroidViewModel {
     private VocabRepository vocabRepository;
     private LiveData<List<Vocab>> allVocabs;
     private LiveData<List<Vocab>> allVocabsWithCategories;
+    private LiveData<List<Vocab>> allSearchedVocabs;
     private Database database;
 
     
@@ -50,6 +51,11 @@ public class VocabViewModel extends AndroidViewModel {
         }
 
         return allVocabsWithCategories;
+    }
+
+    public LiveData<List<Vocab>> getSearchedVocabs(String vocab) {
+        allSearchedVocabs = vocabRepository.getAllSearchedVocabs(vocab);
+        return allSearchedVocabs;
     }
 
 }

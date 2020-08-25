@@ -13,6 +13,7 @@ public class VocabRepository {
 
     private LiveData<List<Vocab>> allVocabs;
     private LiveData<List<Vocab>> allVocabsWithCategories;
+    private LiveData<List<Vocab>> allSearchedVocabs;
 
     public VocabRepository(Application application) {
         Database database = Database.getInstance(application);
@@ -44,6 +45,11 @@ public class VocabRepository {
     public LiveData<List<Vocab>> getLiveAllVocabsWithCategories(int categoryId) {
         allVocabsWithCategories = vocabDao.getLiveAllVocabsWithCategories(categoryId);
         return allVocabsWithCategories;
+    }
+
+    public LiveData<List<Vocab>> getAllSearchedVocabs(String vocab) {
+        allSearchedVocabs = vocabDao.getSearchedVocabs(vocab);
+        return allSearchedVocabs;
     }
 
     private static class InsertVocabAsyncTask extends AsyncTask<Vocab, Void, Void> {

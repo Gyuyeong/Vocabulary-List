@@ -22,6 +22,8 @@ public class AddEditVocabActivity extends AppCompatActivity {
             "com.baudaegam.pocketvocab.EXTRA_NOTES";
     public static final String EXTRA_COUNT =
             "com.baudaegam.pocketvocab.EXTRA_COUNT";
+    public static final String EXTRA_CATEGORY_ID =
+            "com.baudaegam.pocketvocab.EXTRA_CATEGORY_ID";
 
     private EditText editTextVocab;
     private EditText editTextMeaning;
@@ -84,7 +86,7 @@ public class AddEditVocabActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.add_vocab_menu, menu);
+        menuInflater.inflate(R.menu.save_vocab_menu, menu);
         return true;
     }
 
