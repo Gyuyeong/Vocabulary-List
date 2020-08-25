@@ -2,15 +2,26 @@ package com.baudaegam.pocketvocab;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
- // ============== Activity for adding and editing individual vocabularies ======================
+
+import java.util.ArrayList;
+import java.util.List;
+
+// ============== Activity for adding and editing individual vocabularies ======================
 public class AddEditVocabActivity extends AppCompatActivity {
     public static final String EXTRA_ID =
             "com.baudaegam.pocketvocab.EXTRA_ID";
@@ -28,9 +39,14 @@ public class AddEditVocabActivity extends AppCompatActivity {
     private EditText editTextVocab;
     private EditText editTextMeaning;
     private EditText editTextNotes;
+    private Spinner spinnerCategory;
 
     private int categoryId;
     private int count;
+
+    private List<Category> categoryList;
+    private List<String> categoryNameList;
+    private CategoryViewModel categoryViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +56,58 @@ public class AddEditVocabActivity extends AppCompatActivity {
         editTextVocab = findViewById(R.id.edit_text_vocab);
         editTextMeaning = findViewById(R.id.edit_text_meaning);
         editTextNotes = findViewById(R.id.edit_text_notes);
+        spinnerCategory = findViewById(R.id.spinner_category);
 
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
+        categoryList = new ArrayList<>();
+        categoryNameList = new ArrayList<>();
 
         Intent intent = getIntent();
         categoryId = intent.getIntExtra(CategoryActivity.EXTRA_CATEGORY_ID, 1);
         count = intent.getIntExtra(EXTRA_COUNT, 1);
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categoryNameList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinnerCategory.setAdapter(adapter);
+
+        categoryViewModel = ViewModelProviders.of(this).get(CategoryViewModel.class);
+        categoryViewModel.getAllCategories().observe(this, new Observer<List<Category>>() {
+            @Override
+            public void onChanged(List<Category> categories) {
+                for (Category category : categories) {
+                    categoryList.add(category);
+                    categoryNameList.add(category.getCategory());
+
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+
+
+        spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String categoryName = parent.getItemAtPosition(position).toString();
+
+                for (Category category: categoryList) {
+                    if (category.getCategory().trim() == categoryName) {
+                        categoryId = category.getId();
+                        break;
+                    } else {
+                        continue;
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                parent.setSelection(categoryId);
+            }
+        });
+
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
 
         if (intent.hasExtra(EXTRA_ID)) {
             setTitle("Edit Vocabulary");
