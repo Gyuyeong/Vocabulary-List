@@ -58,4 +58,7 @@ public class VocabViewModel extends AndroidViewModel {
         return allSearchedVocabs;
     }
 
+    public String getCategoryName(int categoryId) {
+        return vocabRepository.getCategoryName(categoryId);
+    }
 }

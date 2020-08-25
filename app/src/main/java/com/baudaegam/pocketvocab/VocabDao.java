@@ -32,4 +32,7 @@ public interface VocabDao {
 
     @Query("SELECT * FROM vocab_table WHERE vocab LIKE :vocab")
     LiveData<List<Vocab>> getSearchedVocabs(String vocab);
+
+    @Query("SELECT category FROM category_table JOIN vocab_table ON category_table.id = vocab_table.categoryId WHERE categoryId = :categoryId")
+    String getCategoryName(int categoryId);
 }

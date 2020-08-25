@@ -52,6 +52,10 @@ public class VocabRepository {
         return allSearchedVocabs;
     }
 
+    public String getCategoryName(int categoryId) {
+        return vocabDao.getCategoryName(categoryId);
+    }
+
     private static class InsertVocabAsyncTask extends AsyncTask<Vocab, Void, Void> {
         private VocabDao vocabDao;
 

@@ -23,6 +23,9 @@ import static com.baudaegam.pocketvocab.VocabActivity.ADD_VOCAB_REQUEST;
 import static com.baudaegam.pocketvocab.VocabActivity.EDIT_VOCAB_REQUEST;
 
 public class SearchVocabActivity extends AppCompatActivity {
+    public static final String EXTRA_CATEGORY_NAME =
+            "com.baudaegam.pocketvocab.EXTRA_CATEGORY_NAME";
+
     private VocabViewModel vocabViewModel;
     private SearchView searchView;
     private String searchQuery;
@@ -100,9 +103,9 @@ public class SearchVocabActivity extends AppCompatActivity {
             case R.id.add_vocab:
                 Intent intent = new Intent(SearchVocabActivity.this, AddEditVocabActivity.class);
                 // Let's think about what to do with categories
-//                intent.putExtra(EXTRA_CATEGORY_ID, 1);
+                intent.putExtra(EXTRA_CATEGORY_NAME, 1);
                 intent.putExtra(AddEditVocabActivity.EXTRA_VOCAB, searchQuery);
-//                startActivityForResult(intent, ADD_VOCAB_REQUEST);
+                startActivityForResult(intent, ADD_VOCAB_REQUEST);
                 Toast.makeText(this, "Click add", Toast.LENGTH_SHORT).show();
                 return true;
             default:
