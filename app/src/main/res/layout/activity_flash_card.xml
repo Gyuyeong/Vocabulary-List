@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FlashCardActivity">
+    tools:context=".FlashCardActivity"
+    android:id="@+id/relative_layout_flash_card">
 
     <TextView
         android:id="@+id/text_view_vocab_and_meaning"

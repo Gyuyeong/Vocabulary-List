@@ -3,6 +3,7 @@ package com.baudaegam.pocketvocab;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
+import androidx.core.util.Consumer;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -40,8 +41,8 @@ public class VocabViewModel extends AndroidViewModel {
         return allVocabs;
     }
 
-    public List<Vocab> getAllVocabsWithCategories(int categoryId) {
-        return vocabRepository.getAllVocabsWithCategories(categoryId);
+    public void getAllVocabsWithCategories(int categoryId, Consumer<List<Vocab>> callback) {
+        vocabRepository.getAllVocabsWithCategories(categoryId, callback);
     }
 
     public LiveData<List<Vocab>> getLiveAllVocabsWithCategories(int categoryId) {

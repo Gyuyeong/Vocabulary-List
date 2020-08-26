@@ -3,6 +3,7 @@ package com.baudaegam.pocketvocab;
 import android.app.Application;
 import android.os.AsyncTask;
 
+import androidx.core.util.Consumer;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
@@ -42,8 +43,12 @@ public class VocabRepository {
         return allVocabs;
     }
 
-    public List<Vocab> getAllVocabsWithCategories(int categoryId) {
-        return vocabDao.getAllVocabsWithCategories(categoryId);
+    public void getAllVocabsWithCategories(int categoryId, Consumer<List<Vocab>> callback) {
+//        return vocabDao.getAllVocabsWithCategories(categoryId);
+        ioExecutor.execute(() -> {
+            List<Vocab> vocabList = vocabDao.getAllVocabsWithCategories(categoryId);
+            callback.accept(vocabList);
+        });
     }
 
     public LiveData<List<Vocab>> getLiveAllVocabsWithCategories(int categoryId) {
