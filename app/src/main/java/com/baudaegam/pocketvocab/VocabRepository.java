@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class VocabRepository {
 
@@ -14,6 +16,8 @@ public class VocabRepository {
     private LiveData<List<Vocab>> allVocabs;
     private LiveData<List<Vocab>> allVocabsWithCategories;
     private LiveData<List<Vocab>> allSearchedVocabs;
+
+    private final Executor ioExecutor = Executors.newSingleThreadExecutor();
 
     public VocabRepository(Application application) {
         Database database = Database.getInstance(application);

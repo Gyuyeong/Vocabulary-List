@@ -11,6 +11,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
     private Button categoryButton;
     private Button searchVocabButton;
+    private Button quizButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         categoryButton = findViewById(R.id.category);
         searchVocabButton = findViewById(R.id.search);
+        quizButton = findViewById(R.id.quiz);
 
         categoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
                 openSearchVocabActivity();
             }
         });
+
+        quizButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openQuizActivity();
+            }
+        });
     }
 
     public void openCategoryActivity() {
@@ -42,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void openSearchVocabActivity() {
         Intent intent = new Intent(this, SearchVocabActivity.class);
+        startActivity(intent);
+    }
+
+    public void openQuizActivity() {
+        Intent intent = new Intent(this, SelectCategoryActivity.class);
         startActivity(intent);
     }
 
