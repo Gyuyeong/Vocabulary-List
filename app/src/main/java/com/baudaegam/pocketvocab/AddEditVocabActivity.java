@@ -1,13 +1,15 @@
 package com.baudaegam.pocketvocab;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -81,6 +83,7 @@ public class AddEditVocabActivity extends AppCompatActivity {
 
                     adapter.notifyDataSetChanged();
                 }
+                spinnerCategory.setSelection(categoryId - 1, true);
             }
         });
 
@@ -117,6 +120,11 @@ public class AddEditVocabActivity extends AppCompatActivity {
         } else {
             setTitle("Add Vocabulary");
         }
+
+        if (intent.hasExtra(SearchVocabActivity.EXTRA_SEARCH_VOCAB)) {
+            editTextVocab.setText(intent.getStringExtra(SearchVocabActivity.EXTRA_SEARCH_VOCAB));
+
+        }
     }
 
     private void saveVocab() {
@@ -129,20 +137,57 @@ public class AddEditVocabActivity extends AppCompatActivity {
             return;
         }
 
-        Intent data = new Intent();
-        data.putExtra(EXTRA_VOCAB, vocab);
-        data.putExtra(EXTRA_MEANING, meaning);
-        data.putExtra(EXTRA_NOTES, notes);
-        data.putExtra(EXTRA_COUNT, count);
-        data.putExtra(CategoryActivity.EXTRA_CATEGORY_ID, categoryId);
+        if (categoryId == 1) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(AddEditVocabActivity.this);
 
-        int id = getIntent().getIntExtra(EXTRA_ID, -1);
-        if (id != -1) {
-            data.putExtra(EXTRA_ID, id);
+            builder.setTitle("Are you sure you want to save your vocabulary on All Vocabulary?");
+
+            builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent data = new Intent();
+                    data.putExtra(EXTRA_VOCAB, vocab);
+                    data.putExtra(EXTRA_MEANING, meaning);
+                    data.putExtra(EXTRA_NOTES, notes);
+                    data.putExtra(EXTRA_COUNT, count);
+                    data.putExtra(CategoryActivity.EXTRA_CATEGORY_ID, categoryId);
+
+                    int id = getIntent().getIntExtra(EXTRA_ID, -1);
+                    if (id != -1) {
+                        data.putExtra(EXTRA_ID, id);
+                    }
+
+                    setResult(RESULT_OK, data);
+                    finish();
+                }
+            });
+
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(AddEditVocabActivity.this, "Cancelled", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            builder.show();
+        } else {
+            Intent data = new Intent();
+            data.putExtra(EXTRA_VOCAB, vocab);
+            data.putExtra(EXTRA_MEANING, meaning);
+            data.putExtra(EXTRA_NOTES, notes);
+            data.putExtra(EXTRA_COUNT, count);
+            data.putExtra(CategoryActivity.EXTRA_CATEGORY_ID, categoryId);
+
+            int id = getIntent().getIntExtra(EXTRA_ID, -1);
+            if (id != -1) {
+                data.putExtra(EXTRA_ID, id);
+            }
+
+            setResult(RESULT_OK, data);
+            finish();
         }
 
-        setResult(RESULT_OK, data);
-        finish();
+
     }
 
     @Override

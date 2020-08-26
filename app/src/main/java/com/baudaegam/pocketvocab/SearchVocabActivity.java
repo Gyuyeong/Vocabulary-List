@@ -25,6 +25,9 @@ import static com.baudaegam.pocketvocab.VocabActivity.EDIT_VOCAB_REQUEST;
 public class SearchVocabActivity extends AppCompatActivity {
     public static final String EXTRA_CATEGORY_NAME =
             "com.baudaegam.pocketvocab.EXTRA_CATEGORY_NAME";
+    public static final int SEARCH_ADD_VOCAB_REQUEST = 10;
+    public static final String EXTRA_SEARCH_VOCAB =
+            "com.baudaegam.pocketvocab.EXTRA_SEARCH_VOCAB";
 
     private VocabViewModel vocabViewModel;
     private SearchView searchView;
@@ -104,9 +107,8 @@ public class SearchVocabActivity extends AppCompatActivity {
                 Intent intent = new Intent(SearchVocabActivity.this, AddEditVocabActivity.class);
                 // Let's think about what to do with categories
                 intent.putExtra(EXTRA_CATEGORY_NAME, 1);
-                intent.putExtra(AddEditVocabActivity.EXTRA_VOCAB, searchQuery);
-                startActivityForResult(intent, ADD_VOCAB_REQUEST);
-                Toast.makeText(this, "Click add", Toast.LENGTH_SHORT).show();
+                intent.putExtra(EXTRA_SEARCH_VOCAB, searchQuery);
+                startActivityForResult(intent, SEARCH_ADD_VOCAB_REQUEST);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -117,7 +119,7 @@ public class SearchVocabActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == ADD_VOCAB_REQUEST && resultCode == RESULT_OK) {
+        if (requestCode == SEARCH_ADD_VOCAB_REQUEST && resultCode == RESULT_OK) {
             String vocab = data.getStringExtra(AddEditVocabActivity.EXTRA_VOCAB);
             String meaning = data.getStringExtra(AddEditVocabActivity.EXTRA_MEANING);
             String notes = data.getStringExtra(AddEditVocabActivity.EXTRA_NOTES);

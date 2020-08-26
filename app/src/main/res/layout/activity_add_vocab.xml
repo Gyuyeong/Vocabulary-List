@@ -70,12 +70,33 @@
 
     </EditText>
 
-    <Spinner
-        android:id="@+id/spinner_category"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:spinnerMode="dropdown">
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp">
 
-    </Spinner>
+        <TextView
+            android:id="@+id/text_view_choose_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose Category:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            >
+
+        </TextView>
+
+        <Spinner
+            android:id="@+id/spinner_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"
+            android:layout_toRightOf="@+id/text_view_choose_category"
+            android:layout_marginTop="4dp">
+
+        </Spinner>
+
+    </RelativeLayout>
+
 
 </LinearLayout>
