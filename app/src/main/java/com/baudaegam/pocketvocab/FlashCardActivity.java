@@ -1,6 +1,7 @@
 package com.baudaegam.pocketvocab;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -21,6 +22,7 @@ public class FlashCardActivity extends AppCompatActivity {
     private TextView textViewVocabAndMeaning;
     private List<Integer> categoryIdList;
     private List<Vocab> quizVocabList;
+    private MutableLiveData<List<Vocab>> quizLiveVocabList;
     private VocabViewModel vocabViewModel;
     private RelativeLayout relativeLayoutFlashCard;
 
@@ -39,19 +41,25 @@ public class FlashCardActivity extends AppCompatActivity {
         vocabViewModel = ViewModelProviders.of(this).get(VocabViewModel.class);
 
         quizVocabList = new ArrayList<>();
+        quizLiveVocabList = new MutableLiveData<>();
         for (int id : categoryIdList) {
             vocabViewModel.getLiveAllVocabsWithCategories(id).observe(this, new Observer<List<Vocab>>() {
                 @Override
                 public void onChanged(List<Vocab> vocabs) {
                     for (Vocab vocab : vocabs) {
-                        quizVocabList.add(vocab);
-                        Log.d("TAG", "onCreate: in loop " + quizVocabList.size());
+                        // ====================== I am stuck here. ============================
+                        // Tried many things from google, but no good news.
                     }
                 }
             });
-            Log.d("TAG", "onCreate: each loop " + quizVocabList.size());
+            Log.d("TAG", "onCreate: each loop " + quizLiveVocabList.getValue());
         }
         Log.d("TAG", "onCreate: outside for loop " + quizVocabList.size());
+    }
+
+    private void addVocabToQuizList(Vocab vocab) {
+        quizVocabList.add(vocab);
+        quizLiveVocabList.postValue(quizVocabList);
     }
 
 //        private void setupFlashCard(Vocab vocab) {
